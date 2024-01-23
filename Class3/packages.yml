@@ -1,0 +1,10 @@
+- name: Install other packages
+  yum: 
+    name: "{{ packages }}"
+  vars: 
+    packages:
+    - wget 
+    - unzip
+    - epel-release 
+    - mysql 
+    - https://rpms.remirepo.net/enterprise/remi-release-7.rpm
