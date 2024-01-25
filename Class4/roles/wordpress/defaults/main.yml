@@ -1,0 +1,4 @@
+url : https://wordpress.org/latest.tar.gz
+destination:  /tmp/wordpress.tar.gz
+user: apache
+group: apache

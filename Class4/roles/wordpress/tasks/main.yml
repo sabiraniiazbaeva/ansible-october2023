@@ -1,0 +1,29 @@
+- name: Download wordpress
+  get_url:
+    url: "{{ url }}"
+    dest: "{{ destination }}"
+
+- name: Extract wordpress
+  unarchive:
+    src: "{{ destination }}"  # source of remote machine
+    dest: /tmp                # destination of remote machine
+    remote_src: yes 
+
+- name: Copy file with owner and permissions
+  copy:
+    src: /tmp/wordpress/.
+    dest: /var/www/html
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: '0755'
+    remote_src: yes
+
+- name: Template a file to /var/www/html
+  template:
+    src: wp-config.php.j2
+    dest: /var/www/html/wp-config.php
+
+- name: restart service httpd
+  service:
+    name: httpd
+    state: restarted
